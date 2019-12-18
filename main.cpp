@@ -25,52 +25,52 @@ int main()
 	int serAddrsize = sizeof(serAddr);
 
 
-	cout << "initialize the Winsock   ";
-	if (WSAStartup(MAKEWORD(2, 2), &wsock) != 0)
-	{
-		cout << "falied" << endl;
-		return 0;
-	}
-	else
-	{
-		cout << "successfully" << endl;
+	// cout << "initialize the Winsock   ";
+	// if (WSAStartup(MAKEWORD(2, 2), &wsock) != 0)
+	// {
+	// 	cout << "falied" << endl;
+	// 	return 0;
+	// }
+	// else
+	// {
+	// 	cout << "successfully" << endl;
 
-	}
-
-
-	//create the socket
-	cout << "create the Winsock   ";
-	if ((HostSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == INVALID_SOCKET)
-	{
-		cout << "failed" << endl;
-		WSACleanup();
-		return 0;
-	}
-	else
-	{
-		cout << "successfullt" << endl;
-
-	}
+	// }
 
 
-	//set the ¡®SOCKADDR_IN¡¯ struct address
-	serAddr.sin_family = AF_INET;
-	serAddr.sin_port = htons(PORT);
-	serAddr.sin_addr.s_addr = inet_addr(ADDR);
+	// //create the socket
+	// cout << "create the Winsock   ";
+	// if ((HostSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == INVALID_SOCKET)
+	// {
+	// 	cout << "failed" << endl;
+	// 	WSACleanup();
+	// 	return 0;
+	// }
+	// else
+	// {
+	// 	cout << "successfullt" << endl;
 
-	cout << "bind the socket and than recv data   ";
-	if (bind(HostSocket, (SOCKADDR*)&serAddr, sizeof(serAddr)) == SOCKET_ERROR)
-	{
-		cout << "failed" << endl;
-		closesocket(HostSocket);
-		WSACleanup();
-		return 0;
-	}
-	else{
+	// }
 
-		cout << "successfully." << endl << "Time to recv data:" << endl << endl;
-	}
-	//finish the step of creating the socket
+
+	// //set the ¡®SOCKADDR_IN¡¯ struct address
+	// serAddr.sin_family = AF_INET;
+	// serAddr.sin_port = htons(PORT);
+	// serAddr.sin_addr.s_addr = inet_addr(ADDR);
+
+	// cout << "bind the socket and than recv data   ";
+	// if (bind(HostSocket, (SOCKADDR*)&serAddr, sizeof(serAddr)) == SOCKET_ERROR)
+	// {
+	// 	cout << "failed" << endl;
+	// 	closesocket(HostSocket);
+	// 	WSACleanup();
+	// 	return 0;
+	// }
+	// else{
+
+	// 	cout << "successfully." << endl << "Time to recv data:" << endl << endl;
+	// }
+	// //finish the step of creating the socket
 
 
 	/////////////////////////////////////////////////////////////////////////
@@ -82,37 +82,37 @@ int main()
 	int ID_number;
 	double orginData[4];
 	////////////////////////////////////////////////////////////////////////////////////////
-	while (1)
+	// while (1)
 	{
-		recvfrom(HostSocket, buf, sizeof(buf), 0, (SOCKADDR*)&serAddr, &serAddrsize);
+		// recvfrom(HostSocket, buf, sizeof(buf), 0, (SOCKADDR*)&serAddr, &serAddrsize);
 
 
-		ID_number = Calculate_ID(buf[0], buf[1]);
+		// ID_number = Calculate_ID(buf[0], buf[1]);
 
-		P1 = Clculate_char_to_decimal(buf[2], buf[3], buf[4], buf[5]);
-		P2 = Clculate_char_to_decimal(buf[6], buf[7], buf[8], buf[9]);
-		P3 = Clculate_char_to_decimal(buf[10], buf[11], buf[12], buf[13]);
-		P4 = Clculate_char_to_decimal(buf[14], buf[15], buf[16], buf[17]);
+		// P1 = Clculate_char_to_decimal(buf[2], buf[3], buf[4], buf[5]);
+		// P2 = Clculate_char_to_decimal(buf[6], buf[7], buf[8], buf[9]);
+		// P3 = Clculate_char_to_decimal(buf[10], buf[11], buf[12], buf[13]);
+		// P4 = Clculate_char_to_decimal(buf[14], buf[15], buf[16], buf[17]);
 
 
-		if ((P3 == 0) && (P4==0))
-		{
-			cout << "the hreatBeat of the base station" << endl;
-		}
-		else
-		{
+		// if ((P3 == 0) && (P4==0))
+		// {
+		// 	cout << "the hreatBeat of the base station" << endl;
+		// }
+		// else
+		// {
 			
-			orginData[0] = P1;
-			orginData[1] = P2;
-			orginData[2] = P3;
-			orginData[3] = P4;
+		// 	orginData[0] = P1;
+		// 	orginData[1] = P2;
+		// 	orginData[2] = P3;
+		// 	orginData[3] = P4;
 		
 
 		double pos[2] = { 0 };
 
 		XYTDOA xyTDOA;
 		xyTDOA.GetData(orginData);
-		xyTDOA.displayData();
+		// xyTDOA.displayData();
 		xyTDOA.Calculate();//加入对Z计算的代码
 		xyTDOA.displayPOS();
 		xyTDOA.displayFinal_XY(pos);
@@ -125,7 +125,7 @@ int main()
 		double xyOutput[2];
 		myTaylor2Dim.TaylorCalcXY(x, y);//xy
 		myTaylor2Dim.GetCalcResult(&(xyOutput[0]), &(xyOutput[1]));
-		//cout << xyOutput[0] << "  " << xyOutput[1] << endl;
+		// cout << xyOutput[0] << "  " << xyOutput[1] << endl;
 
 		double xyz_Initial_Taylor[3] = { 0 };
 		xyz_Initial_Taylor[0]=xyOutput[0];
@@ -145,18 +145,17 @@ int main()
 		myTaylor3Dim.TaylorCalcXYZ(x_final,y_final,z_final);//xyz
 		myTaylor3Dim.GetCalcResult(&(xyzOutput[0]), &(xyzOutput[1]), &(xyzOutput[2]));
 		xyzOutput[2] = xyzOutput[2] - 0.15;
-		cout<<"the ID number:   "<<ID_number<<"   ";
+		// cout<<"the ID number:   "<<ID_number<<"   ";
 		cout <<"  X: "<<xyzOutput[0] <<"  Y: "<< xyzOutput[1] <<"  Z: "<< xyzOutput[2] << endl;
 
 
 
 		//storage the object location 
-		}
 
 	}
 	////////////////////////////////////////////////////////////////////////////////////////
-	closesocket(HostSocket);
-	WSACleanup();
+	// closesocket(HostSocket);
+	// WSACleanup();
 
 
 	return 0;

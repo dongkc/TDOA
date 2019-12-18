@@ -133,8 +133,8 @@ void XYTDOA::displayFinal_XY(double pos[2])
 	pos[0] = POS_X;
 	pos[1] = POS_Y;
 	cout << "the chan algorithm : X & Y" << endl;
-	cout << "POS_X=" << POS_X << endl;
-	cout << "POS_Y=" << POS_Y << endl;
+	cout << "POS_X= " << POS_X << endl;
+	cout << "POS_Y= " << POS_Y << endl;
 };
 
 
@@ -147,9 +147,12 @@ double XYTDOA::Calculate()
 		data[i]=data[i]+DELAY[i];
 	}
 
-	R21=(data[1]-data[0])*0.3;
-	R31=(data[2]-data[0])*0.3;
-	R41=(data[3]-data[0])*0.3;	
+    R21 =  -0.5960912957946176 * 0.3;
+    R31 =  -0.9693015534357357 * 0.3;
+    R41 =  -0.2083398403580372 * 0.3;
+	// R21=(data[1]-data[0])*0.3;
+	// R31=(data[2]-data[0])*0.3;
+	// R41=(data[3]-data[0])*0.3;	
     
 	K1=pow(BS[0][0],2)+pow(BS[0][1],2);
 	K2=pow(BS[1][0],2)+pow(BS[1][1],2);
@@ -369,7 +372,7 @@ void XYTDOA::FI_Cal()
 	{
 		for (int j = 0; j < 3; ++j)
 		{
-			FI[i][j]=pow(30000000,2)*FI[i][j];
+			FI[i][j]=pow((double)30000000,2)*FI[i][j];
 		}
 	}
 
